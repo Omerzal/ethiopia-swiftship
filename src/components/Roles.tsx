@@ -24,13 +24,18 @@ export function Roles() {
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {roles.map((r) => (
-            <div key={r.name} className="glass rounded-2xl p-5 shadow-card hover:translate-y-[-2px] transition">
-              <div className={`size-12 rounded-xl bg-gradient-to-br ${r.color} grid place-items-center text-background shadow-glow`}>
-                <r.icon className="size-5" strokeWidth={2.4} />
+            <Tilt3D key={r.name} max={18} className="h-full">
+              <div className="glass rounded-2xl p-5 h-full shadow-card transition-shadow hover:shadow-glow">
+                <div
+                  className={`size-12 rounded-xl bg-gradient-to-br ${r.color} grid place-items-center text-background shadow-glow`}
+                  style={{ transform: "translateZ(50px)" }}
+                >
+                  <r.icon className="size-5" strokeWidth={2.4} />
+                </div>
+                <h3 className="mt-4 font-semibold" style={{ transform: "translateZ(30px)" }}>{r.name}</h3>
+                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{r.desc}</p>
               </div>
-              <h3 className="mt-4 font-semibold">{r.name}</h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{r.desc}</p>
-            </div>
+            </Tilt3D>
           ))}
         </div>
       </div>
