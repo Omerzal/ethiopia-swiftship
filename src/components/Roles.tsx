@@ -1,4 +1,5 @@
 import { Crown, Building2, UserCog, Truck, User } from "lucide-react";
+import { Tilt3D } from "./Tilt3D";
 
 const roles = [
   { icon: Crown, name: "Super Admin", color: "from-yellow-300 to-orange-400", desc: "Nationwide controller. Branches, policies, fraud, audit logs." },
