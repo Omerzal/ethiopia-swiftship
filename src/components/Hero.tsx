@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldCheck, QrCode, Radar, Zap } from "lucide-react";
 import { Parcel3D } from "./Parcel3D";
+import { Tilt3D } from "./Tilt3D";
 
 export function Hero() {
   return (
@@ -74,9 +75,11 @@ export function Hero() {
 
           {/* Center floating parcel */}
           <div className="absolute inset-0 grid place-items-center">
-            <div className="animate-float preserve-3d">
-              <Parcel3D size={240} />
-            </div>
+            <Tilt3D max={22} glare={false} className="">
+              <div className="animate-float preserve-3d">
+                <Parcel3D size={240} />
+              </div>
+            </Tilt3D>
           </div>
 
           {/* Floating cards */}
@@ -122,14 +125,18 @@ function FloatingCard({
   sub: string;
 }) {
   return (
-    <div className={`absolute glass rounded-xl p-3 pr-4 shadow-card animate-float-slow ${className}`}>
-      <div className="flex items-center gap-3">
-        <div className="size-8 rounded-lg bg-white/5 grid place-items-center">{icon}</div>
-        <div>
-          <div className="text-xs font-medium">{title}</div>
-          <div className="text-[10px] text-muted-foreground">{sub}</div>
+    <div className={`absolute ${className}`}>
+      <Tilt3D max={20} glare={false}>
+        <div className="glass rounded-xl p-3 pr-4 shadow-card animate-float-slow">
+          <div className="flex items-center gap-3">
+            <div className="size-8 rounded-lg bg-white/5 grid place-items-center" style={{ transform: "translateZ(20px)" }}>{icon}</div>
+            <div style={{ transform: "translateZ(15px)" }}>
+              <div className="text-xs font-medium">{title}</div>
+              <div className="text-[10px] text-muted-foreground">{sub}</div>
+            </div>
+          </div>
         </div>
-      </div>
+      </Tilt3D>
     </div>
   );
 }

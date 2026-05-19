@@ -9,6 +9,7 @@ import {
   Bell,
   MapPin,
 } from "lucide-react";
+import { Tilt3D } from "./Tilt3D";
 
 const features = [
   { icon: QrCode, title: "QR + Secret Code Release", desc: "Two-factor parcel release combining QR scan and secret verification code — preventing theft and fake screenshots." },
@@ -41,20 +42,21 @@ export function Features() {
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((f, i) => (
-            <div
-              key={f.title}
-              className="group relative glass rounded-2xl p-6 hover:translate-y-[-2px] transition shadow-card overflow-hidden"
-              style={{ animationDelay: `${i * 60}ms` }}
-            >
-              <div className="absolute -top-16 -right-16 size-40 rounded-full bg-gradient-primary opacity-0 group-hover:opacity-20 blur-2xl transition" />
-              <div className="relative">
-                <div className="size-11 rounded-xl bg-gradient-primary/20 border border-white/10 grid place-items-center">
-                  <f.icon className="size-5 text-primary" />
+            <Tilt3D key={f.title} className="h-full">
+              <div
+                className="group relative glass rounded-2xl p-6 h-full shadow-card overflow-hidden transition-shadow hover:shadow-glow"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <div className="absolute -top-16 -right-16 size-40 rounded-full bg-gradient-primary opacity-0 group-hover:opacity-30 blur-2xl transition" />
+                <div className="relative" style={{ transform: "translateZ(40px)" }}>
+                  <div className="size-11 rounded-xl bg-gradient-primary/20 border border-white/10 grid place-items-center">
+                    <f.icon className="size-5 text-primary" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold">{f.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold">{f.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
               </div>
-            </div>
+            </Tilt3D>
           ))}
         </div>
       </div>
