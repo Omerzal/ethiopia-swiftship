@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldCheck, QrCode, Radar, Zap } from "lucide-react";
 import { Parcel3D } from "./Parcel3D";
+import { Tilt3D } from "./Tilt3D";
 
 export function Hero() {
   return (
