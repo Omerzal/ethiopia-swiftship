@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrackingRouteImport } from './routes/tracking'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TrackingRoute = TrackingRouteImport.update({
@@ -29,6 +30,11 @@ const FeaturesRoute = FeaturesRouteImport.update({
   path: '/features',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/tracking': typeof TrackingRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/features' | '/login' | '/tracking'
+  fullPaths: '/' | '/dashboard' | '/features' | '/login' | '/tracking'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/features' | '/login' | '/tracking'
-  id: '__root__' | '/' | '/features' | '/login' | '/tracking'
+  to: '/' | '/dashboard' | '/features' | '/login' | '/tracking'
+  id: '__root__' | '/' | '/dashboard' | '/features' | '/login' | '/tracking'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
   FeaturesRoute: typeof FeaturesRoute
   LoginRoute: typeof LoginRoute
   TrackingRoute: typeof TrackingRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
   FeaturesRoute: FeaturesRoute,
   LoginRoute: LoginRoute,
   TrackingRoute: TrackingRoute,
