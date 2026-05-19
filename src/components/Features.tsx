@@ -9,6 +9,7 @@ import {
   Bell,
   MapPin,
 } from "lucide-react";
+import { Tilt3D } from "./Tilt3D";
 
 const features = [
   { icon: QrCode, title: "QR + Secret Code Release", desc: "Two-factor parcel release combining QR scan and secret verification code — preventing theft and fake screenshots." },
