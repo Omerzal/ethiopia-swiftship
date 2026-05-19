@@ -63,9 +63,11 @@ export const verifyAndRelease = createServerFn({ method: "POST" })
     const secretOk = !!parcel && parcel.secret_code === data.secret;
     const released = qrOk && secretOk && parcel.status !== "delivered";
 
-    await supabaseAdmin.from("verifications").insert({
-      parcel_id: parcel?.id, agent_id: userId, qr_ok: qrOk, secret_ok: secretOk, released,
-    });
+    if (parcel?.id) {
+      await supabaseAdmin.from("verifications").insert({
+        parcel_id: parcel.id, agent_id: userId, qr_ok: qrOk, secret_ok: secretOk, released,
+      });
+    }
 
     if (released && parcel) {
       await supabaseAdmin.from("parcels").update({
