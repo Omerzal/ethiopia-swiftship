@@ -3,8 +3,17 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Navbar } from "@/components/Navbar";
-import { Package } from "lucide-react";
+import { Package, Crown, Building2, UserCog, Truck, User, Sparkles } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+
+const DEMO_ROLES = [
+  { key: "super_admin",   label: "Super Admin",     email: "superadmin@parcelgrid.demo", icon: Crown,     tint: "from-yellow-300 to-orange-400" },
+  { key: "branch_manager",label: "Branch Manager",  email: "manager@parcelgrid.demo",    icon: Building2, tint: "from-primary to-accent" },
+  { key: "agent",         label: "Agent",           email: "agent@parcelgrid.demo",      icon: UserCog,   tint: "from-cyan-300 to-emerald-300" },
+  { key: "driver",        label: "Driver",          email: "driver@parcelgrid.demo",     icon: Truck,     tint: "from-blue-300 to-cyan-300" },
+  { key: "customer",      label: "Customer",        email: "customer@parcelgrid.demo",   icon: User,      tint: "from-emerald-300 to-teal-300" },
+] as const;
+const DEMO_PASSWORD = "demo123456";
 
 export const Route = createFileRoute("/login")({
   validateSearch: (s: Record<string, unknown>) => ({ mode: (s.mode as string) === "signup" ? "signup" : "signin" }),
