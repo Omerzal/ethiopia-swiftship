@@ -5,7 +5,7 @@ import { CitiesMarquee } from "@/components/CitiesMarquee";
 import { Features } from "@/components/Features";
 import { Workflow } from "@/components/Workflow";
 import { Roles } from "@/components/Roles";
-import { DashboardPreview } from "@/components/DashboardPreview";
+import { LanguageSection } from "@/components/LanguageSection";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
 
@@ -21,15 +21,15 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full">
       <Navbar />
-      <main>
+      <main className="w-full">
         <Hero />
         <CitiesMarquee />
         <Features />
         <Workflow />
         <Roles />
-        <DashboardPreview />
+        <LanguageSection />
         <CTA />
       </main>
       <Footer />
