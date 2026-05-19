@@ -75,9 +75,11 @@ export function Hero() {
 
           {/* Center floating parcel */}
           <div className="absolute inset-0 grid place-items-center">
-            <div className="animate-float preserve-3d">
-              <Parcel3D size={240} />
-            </div>
+            <Tilt3D max={22} glare={false} className="">
+              <div className="animate-float preserve-3d">
+                <Parcel3D size={240} />
+              </div>
+            </Tilt3D>
           </div>
 
           {/* Floating cards */}
