@@ -30,8 +30,11 @@ function DashboardPage() {
 
   if (loading || !user) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
+  // Protected routes: only roles assigned to this user can be selected/rendered.
   const availableRoles: Role[] = roles.length ? roles : ["customer"];
-  const role = activeRole ?? availableRoles[0];
+  const requested = activeRole ?? availableRoles[0];
+  const role: Role = availableRoles.includes(requested) ? requested : availableRoles[0];
+  const canView = (r: Role) => availableRoles.includes(r);
 
   return (
     <div className="min-h-screen w-full">
