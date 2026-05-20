@@ -55,13 +55,13 @@ function DashboardPage() {
           </div>
         </div>
 
-        {role === "super_admin" && <SuperAdminView />}
-        {role === "branch_manager" && <BranchManagerView />}
-        {role === "agent" && <AgentView />}
-        {role === "driver" && <DriverView />}
-        {role === "customer" && <CustomerView />}
+        {role === "super_admin" && canView("super_admin") && <SuperAdminView />}
+        {role === "branch_manager" && canView("branch_manager") && <BranchManagerView />}
+        {role === "agent" && canView("agent") && <AgentView />}
+        {role === "driver" && canView("driver") && <DriverView />}
+        {role === "customer" && canView("customer") && <CustomerView />}
 
-        {role !== "customer" && <VerifyPanel />}
+        {role !== "customer" && canView(role) && <VerifyPanel />}
       </main>
       <Footer />
 
