@@ -30,8 +30,11 @@ function DashboardPage() {
 
   if (loading || !user) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
+  // Protected routes: only roles assigned to this user can be selected/rendered.
   const availableRoles: Role[] = roles.length ? roles : ["customer"];
-  const role = activeRole ?? availableRoles[0];
+  const requested = activeRole ?? availableRoles[0];
+  const role: Role = availableRoles.includes(requested) ? requested : availableRoles[0];
+  const canView = (r: Role) => availableRoles.includes(r);
 
   return (
     <div className="min-h-screen w-full">
@@ -52,13 +55,13 @@ function DashboardPage() {
           </div>
         </div>
 
-        {role === "super_admin" && <SuperAdminView />}
-        {role === "branch_manager" && <BranchManagerView />}
-        {role === "agent" && <AgentView />}
-        {role === "driver" && <DriverView />}
-        {role === "customer" && <CustomerView />}
+        {role === "super_admin" && canView("super_admin") && <SuperAdminView />}
+        {role === "branch_manager" && canView("branch_manager") && <BranchManagerView />}
+        {role === "agent" && canView("agent") && <AgentView />}
+        {role === "driver" && canView("driver") && <DriverView />}
+        {role === "customer" && canView("customer") && <CustomerView />}
 
-        {role !== "customer" && <VerifyPanel />}
+        {role !== "customer" && canView(role) && <VerifyPanel />}
       </main>
       <Footer />
 
